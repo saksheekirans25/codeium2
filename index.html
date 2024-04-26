@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italian Restaurant</title>
+   
+</head>
+    <style>
+       body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+        color: #333; /* Improving text color contrast */
+    }
+
+header {
+    background-color: #E74C3C;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+h1, h2 {
+    font-family: 'Roboto', sans-serif;
+}
+
+section {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    background-color: #3498DB;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980B9;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-total {
+    font-weight: bold;
+    margin-top: 10px;
+}
+       #search {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#search-input {
+    padding: 5px;
+    width: 200px;
+}
+        #search {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#search-input {
+    padding: 5px;
+    width: 200px;
+}
+    </style>
+<body>
+    <header>
+        <h1>Welcome to our Italian Restaurant</h1>
+    </header>
+      <section id="search">
+    <label for="search-input">Search Menu:</label>
+    <input type="text" id="search-input" placeholder="Search menu...">
+</section>
+     <section id="menu">
+        <h2>Our Menu</h2>
+        <ul>
+            <li>Pasta - $10</li>
+            <li>Pizza - $12</li>
+            <li>Risotto - $15</li>
+        </ul>
+        <button onclick="addToCart('Pasta', 10)">Add Pasta to Cart</button>
+        <button onclick="addToCart('Pizza', 12)">Add Pizza to Cart</button>
+        <button onclick="addToCart('Risotto', 15)">Add Risotto to Cart</button>
+    </section>
+
+    <section id="cart">
+        <h2>Cart</h2>
+        <ul id="cart-items"></ul>
+        <button id="checkout-btn" onclick="checkout()">Checkout</button>
+        <p class="cart-total">Total: $<span id="total">0</span></p>
+    </section>
+
+    <script>
+       // JavaScript functionality
+let cart = [];
+let total = 0;
+
+function addToCart(item, price) {
+  cart.push({ item, price });
+  total += price;
+  updateCart();
+}
+
+function updateCart() {
+  const cartItems = document.getElementById('cart-items');
+  const totalElement = document.getElementById('total');
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const li = document.createElement('li');
+    const cartItem = document.createElement('div');
+    cartItem.classList.add('cart-item');
+    cartItem.innerHTML = `${item.item} - $${item.price}`;
+    li.appendChild(cartItem);
+    cartItems.appendChild(li);
+  });
+  totalElement.textContent = total;
+}
+
+function checkout() {
+  alert(`Thank you for your order! Total: $${total}`);
+  cart = [];
+  total = 0;
+  updateCart();
+}
+    </script>
+</body>
+</html>
